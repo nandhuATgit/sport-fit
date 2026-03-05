@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SportFit Auth</title>
+
+<style>
+body{
+  font-family: Arial;
+  background:black;
+  color:white;
+  text-align:center;
+  padding:40px;
+}
+
+.box{
+  max-width:400px;
+  margin:auto;
+  padding:25px;
+  border-radius:15px;
+  background:#111;
+}
+
+input{
+  width:90%;
+  padding:12px;
+  margin:8px;
+  border-radius:25px;
+  border:1px solid gray;
+  background:black;
+  color:white;
+}
+
+button{
+  padding:12px 25px;
+  border-radius:25px;
+  background:#00ffae;
+  border:none;
+  cursor:pointer;
+  margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>SPORTFIT 🔥</h1>
+
+<div class="box">
+
+<h2>Login</h2>
+
+<input id="loginEmail" placeholder="Email">
+<input id="loginPassword" type="password" placeholder="Password">
+<br>
+<button onclick="loginUser()">Login</button>
+
+<hr>
+
+<h2>Register</h2>
+
+<input id="regName" placeholder="Name">
+<input id="regEmail" placeholder="Email">
+<input id="regPassword" type="password" placeholder="Password">
+<br>
+<button onclick="registerUser()">Register</button>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

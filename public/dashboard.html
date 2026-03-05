@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+  <title>SportFit</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+
+<!-- ================= WELCOME ================= -->
+<div id="welcomeScreen" class="welcome-screen">
+  <div class="welcome-box glass">
+    <h1>WELCOME</h1>
+    <h2>" <span id="welcomeUsername"></span> "</h2>
+
+    <button class="start-btn" onclick="enterDashboard()">
+      Let's Start →
+    </button>
+  </div>
+</div>
+
+<!-- ================= FEATURE BLOCKS ================= -->
+<div id="featureScreen" class="feature-screen" style="display:none;">
+  <div class="feature-grid">
+
+    <div class="feature-card glass" onclick="openFeature('profile')">
+      👤<br>Profile
+    </div>
+
+    <div class="feature-card glass" onclick="openFeature('chat')">
+      🤖<br>AI Trainer
+    </div>
+
+    <div class="feature-card glass" onclick="openFeature('sports')">
+      🏃<br>Sports
+    </div>
+
+    <div class="feature-card glass" onclick="openFeature('diet')">
+      🥗<br>Diet
+    </div>
+
+    <div class="feature-card glass" onclick="logout()">
+      🚪<br>Logout
+    </div>
+
+  </div>
+</div>
+
+<!-- ================= PROFILE ================= -->
+<div id="profileSection" class="feature-page" style="display:none;">
+  <button class="back-btn" onclick="goBack()">← Back</button>
+
+  <div class="glass profile-card">
+    <h2>Your Profile</h2>
+    <p><b>Name:</b> <span id="name"></span></p>
+    <p><b>Age:</b> <span id="age"></span></p>
+    <p><b>Weight:</b> <span id="weight"></span></p>
+    <p><b>Goal:</b> <span id="goal"></span></p>
+  </div>
+</div>
+
+<!-- ================= AI CHAT ================= -->
+<div id="chatSection" class="feature-page" style="display:none;">
+  <button class="back-btn" onclick="goBack()">← Back</button>
+
+  <div class="chat-layout glass">
+
+    <!-- LEFT RECENT -->
+    <div class="chat-history-panel">
+      <h3>Recent</h3>
+      <div id="historyBox" class="recent-list"></div>
+
+<!-- FULL CHAT MODAL -->
+<div id="chatModal" class="chat-modal" style="display:none;">
+  <div class="chat-modal-content glass">
+    <button class="back-btn" onclick="closeChatModal()">← Back</button>
+    <div id="fullChatView"></div>
+  </div>
+</div>
+    </div>
+
+    <!-- RIGHT CHAT -->
+    <div class="chat-main">
+      <div class="chat-box" id="chatBox"></div>
+
+      <div class="chat-input-area">
+        <input type="text" id="userInput" placeholder="Ask your AI trainer..." />
+        <button onclick="sendMessage()">➤</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ================= SPORTS ================= -->
+<div id="sportsSection" class="feature-page" style="display:none;">
+  <button class="back-btn" onclick="goBack()">← Back</button>
+  <h2>Sports Explorer</h2>
+  <div id="sportsBox" class="sports-grid"></div>
+</div>
+
+<!-- ================= DIET ================= -->
+<div id="dietSection" class="feature-page" style="display:none;">
+  <button class="back-btn" onclick="goBack()">← Back</button>
+  <h2>Diet Planner</h2>
+  <div id="dietBox" class="glass"></div>
+</div>
+
+<script src="js/dashboard.js"></script>
+</body>
+</html>

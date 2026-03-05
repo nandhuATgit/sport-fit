@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SportFit</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div class="auth-container">
+    <div class="auth-box glass">
+
+      <h1 class="REG">Register</h1>
+     
+
+      <input type="text" id="name" placeholder="Name">
+      <input type="number" id="age" placeholder="Age">
+      <input type="number" id="weight" placeholder="Weight (kg)">
+
+      <select id="goal">
+        <option value="">Select Goal</option>
+        <option value="weight loss" style="color: black; ">Weight Loss</option>
+        <option value="muscle gain" style="color: black;  ">Muscle Gain</option>
+        <option value="fitness" style="color: black; ">General Fitness</option>
+      </select>
+
+      <input type="email" id="email" placeholder="Email">
+      <input type="password" id="password" placeholder="Password">
+
+      <button onclick="register()">Register</button>
+
+      <p>Already have account? <a class="LOGIN" href="login.html">Login</a></p>
+
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>

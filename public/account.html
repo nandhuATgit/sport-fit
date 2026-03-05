@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SportFit Dashboard</title>
+
+<style>
+body{
+  font-family: Arial;
+  background:black;
+  color:white;
+  text-align:center;
+  padding:20px;
+}
+
+.card{
+  background:#111;
+  padding:20px;
+  margin:20px auto;
+  border-radius:15px;
+  max-width:500px;
+}
+
+input{
+  width:80%;
+  padding:12px;
+  border-radius:25px;
+  border:1px solid gray;
+  background:black;
+  color:white;
+}
+
+button{
+  padding:10px 20px;
+  border-radius:25px;
+  background:#00ffae;
+  border:none;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Welcome to SportFit 🚀</h1>
+
+<div class="card">
+  <h2>AI Coach</h2>
+  <input id="aiInput" placeholder="Ask about fitness...">
+  <br><br>
+  <button onclick="askAI()">Ask AI</button>
+  <p id="aiResponse"></p>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
