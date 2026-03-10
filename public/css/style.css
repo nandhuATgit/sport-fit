@@ -6,7 +6,7 @@
 }
 
 body {
-  background: linear-gradient(135deg, #090909, #090909, #090909);
+  background: black;
   min-height: 100vh;
   color: white;
 }
@@ -17,7 +17,6 @@ body {
   backdrop-filter: blur(12px);
   border-radius: 20px;
   padding: 60px;
-  
 }
 
 /* Center Auth */
@@ -28,19 +27,19 @@ body {
   height: 100vh;
 }
 
-
 .auth-box {
   width: 450px;
 }
 
 .auth-box h2 {
   text-align: center;
-  
+
   margin-bottom: 20px;
- 
 }
 
-input, select, button {
+input,
+select,
+button {
   width: 100%;
   padding: 10px;
   margin: 8px 0;
@@ -49,8 +48,9 @@ input, select, button {
   outline: none;
 }
 
-input, select {
-  background: rgba(255,255,255,0.15);
+input,
+select {
+  background: rgba(255, 255, 255, 0.15);
   color: white;
 }
 
@@ -92,7 +92,7 @@ button:hover {
 }
 
 .sidebar ul li:hover {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* Main Content */
@@ -100,10 +100,6 @@ button:hover {
   flex: 1;
   padding: 30px;
 }
-
-
-
-
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -133,14 +129,20 @@ button:hover {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 hr {
   border: 0;
   height: 1px;
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
   margin: 10px 0;
 }
 
@@ -159,21 +161,17 @@ hr {
   font-size: 70px;
   opacity: 0.2;
   text-align: center;
- 
- position: absolute;
- top: 105px;
 
- 
+  position: absolute;
+  top: 105px;
 }
 
-.reg{
+.reg {
   color: #5dadfd;
 }
-.swagath{
+.swagath {
   margin-top: 5px;
   margin-left: 5px;
- 
-  
 }
 .ai-message {
   line-height: 1.7;
@@ -194,16 +192,13 @@ hr {
 .ai-message li {
   margin-bottom: 6px;
 }
-.LOGIN{
+.LOGIN {
   color: #5dadfd;
 }
-.REG{
+.REG {
   text-align: center;
   font-size: 25px;
- 
-  
 }
-
 
 /* ===== WELCOME SCREEN ===== */
 .welcome-screen {
@@ -237,7 +232,7 @@ hr {
 
 .start-btn:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 25px rgba(0,212,255,0.6);
+  box-shadow: 0 0 25px rgba(0, 212, 255, 0.6);
 }
 /* ================= WELCOME SCREEN ================= */
 .welcome-screen {
@@ -288,7 +283,7 @@ hr {
 
 .feature-card {
   width: 300px;
-  height: 500px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -296,45 +291,96 @@ hr {
   font-size: 20px;
   cursor: pointer;
   transition: 0.3s;
-   background: linear-gradient(45deg, #330092, #000000);
+  background: linear-gradient(45deg, #330092, #000000);
 }
 
 .feature-card:hover {
   transform: translateY(-8px) scale(1.05);
   transform: scale(1.1);
   box-shadow: 0 0 20px rgb(85, 0, 255);
-   
 }
 
-.log{
-
-   display: flex;
+.log {
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   max-width: 100px;
   padding: 10px 20px;
   margin-top: 20px;
-  border-radius: 200px; 
+  border-radius: 200px;
   cursor: pointer;
   transition: 0.3s;
-  background: linear-gradient(45deg, #000000, #0e0091);
-  
+  background: linear-gradient(45deg, #120048, #00ccff);
 }
-.log:hover{
+.log:hover {
   transform: translateY(-8px) scale(1.05);
-   transform: scale(1.1);
-  box-shadow: 0 0 15px rgb(0, 33, 200);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgb(0, 247, 255);
 }
-
-
-
 
 /* ================= PROFILE CARD ================= */
-.profile-card {
-  max-width: 500px;
-  animation: fadeIn 0.5s ease;
-  background: linear-gradient(45deg, #000004, #080050);
+/* ===== PROFILE OVERLAY (BLUR BACKGROUND) ===== */
+
+.profile-overlay{
+    position: fixed;
+    inset: 0;
+
+    display: none;
+
+    justify-content: flex-start;   /* move card to left */
+    align-items: center;
+
+    padding-left: 90px;            /* adjust position */
+
+    background: rgba(0,0,0,0.25);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    z-index: 9999;
+}
+
+
+
+/* ===== PROFILE CARD ===== */
+
+.profile-card{
+
+    background: linear-gradient(45deg,#000000,#000038);
+
+    padding: 110px 80px;
+
+    border-radius: 18px;
+
+    color: white;
+
+    width: 330px;
+    max-width: 90%;
+
+    text-align: left;
+
+    animation: slideUp 0.5s ease;
+
+}
+
+
+/* ===== ANIMATIONS ===== */
+
+@keyframes fadeIn{
+    from{opacity:0}
+    to{opacity:1}
+}
+
+@keyframes slideUp{
+    from{
+        transform: translateY(40px);
+        opacity:0;
+    }
+    to{
+        transform: translateY(0);
+        opacity:1;
+    }
 }
 
 /* ================= SPORTS GRID ================= */
@@ -362,12 +408,34 @@ hr {
 }
 
 /* back button */
-.back-btn {
-  width: auto;
+
+     .back-btn{
+    width: auto;
   padding: 8px 16px;
   margin-bottom: 20px;
   border-radius: 20px;
 }
+
+.back-btnn{
+    position: absolute;
+    top: 30px;
+    left: 30px;
+
+    padding: 8px 16px;
+
+    border-radius: 20px;
+
+    background: rgb(0, 149, 255);
+    color: white;
+
+    cursor: pointer;
+
+    display: inline-block;   /* prevents full width */
+    width: auto;             /* ensures it fits the text */
+}
+
+
+
 
 /* center profile */
 .profile-card {
@@ -379,13 +447,13 @@ hr {
   margin-bottom: 8px;
   border-radius: 10px;
   cursor: pointer;
-  background: rgba(255,255,255,0.06);
+  background: rgba(255, 255, 255, 0.06);
   transition: 0.25s;
   font-size: 13px;
 }
 
 .recent-item:hover {
-  background: rgba(0,212,255,0.25);
+  background: rgba(0, 212, 255, 0.25);
   transform: translateX(4px);
 }
 
@@ -393,7 +461,7 @@ hr {
 .chat-modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(10px);
   display: flex;
   justify-content: center;
@@ -406,15 +474,7 @@ hr {
   max-height: 80vh;
   overflow-y: auto;
   padding: 30px;
- 
 }
-
-
-
-
-
-
-
 
 /* MAIN LAYOUT */
 .chat-layout {
@@ -426,11 +486,9 @@ hr {
 /* LEFT PANEL */
 .chat-history-panel {
   width: 260px;
-  border-right: 1px solid rgba(255,255,255,0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
   padding-right: 15px;
   overflow-y: auto;
- 
-  
 }
 
 /* RIGHT SIDE */
@@ -453,14 +511,13 @@ hr {
   display: flex;
   gap: 10px;
   padding: 12px;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.recent-list{
-  display:flex;
+.recent-list {
+  display: flex;
   flex-direction: column-reverse;
 }
-
 
 .section-title {
   margin-bottom: 20px;
@@ -475,14 +532,14 @@ hr {
   position: fixed;
   left: 40px;
   top: 140px;
-  height: 100vh;         
-  width: 180px;           
+  height: 100vh;
+  width: 180px;
 
   padding: 20px 12px;
-  background: rgba(0,0,0,0.35);
+  background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(12px);
 
-  z-index: 1000;         
+  z-index: 1000;
 }
 
 .tab-btn {
@@ -492,19 +549,19 @@ hr {
   border-radius: 20px;
   border: none;
   cursor: pointer;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   color: white;
   transition: 0.25s;
 }
 
 .tab-btn.active {
-  background: linear-gradient(135deg,#4facfe,#00f2fe);
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
 }
 
 /* ===== Sports Grid ===== */
 .sports-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px,1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 22px;
   margin-left: 400px;
 }
@@ -516,24 +573,24 @@ hr {
   border-radius: 18px;
   cursor: pointer;
   font-weight: 600;
-  background: rgba(255,255,255,0.06);
+  background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(12px);
   transition: 0.3s;
-  
-   background: linear-gradient(45deg, #330092, #000000);
+
+  background: linear-gradient(45deg, #330092, #000000);
 }
 
 .sport-card:hover {
   transform: translateY(-8px) scale(1.03);
-  background: linear-gradient(135deg,#040073,#00aaff);
-   box-shadow: 0 0 20px rgb(77, 107, 255);
+  background: linear-gradient(135deg, #040073, #00aaff);
+  box-shadow: 0 0 20px rgb(77, 107, 255);
 }
 
 /* ===== Details Overlay ===== */
 .sport-details {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.45);
+  background: rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(10px);
   display: none;
   justify-content: center;
@@ -556,8 +613,14 @@ hr {
 }
 
 @keyframes pop {
-  from { transform: scale(0.85); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .details-section {

@@ -123,15 +123,18 @@ async function loadProfile() {
 
     const user = await res.json();
 
-    // ✅ Insert values into spans
+// ✅ Insert values into spans
     document.getElementById("name").innerText = user.name || "";
     document.getElementById("age").innerText = user.age || "";
     document.getElementById("weight").innerText = user.weight || "";
+    
     
     // If you also want goal (add span first, see below)
     if (document.getElementById("goal")) {
       document.getElementById("goal").innerText = user.goal || "";
     }
+    
+   
 
   } catch (err) {
     console.error("Profile load error:", err);
@@ -218,25 +221,40 @@ async function loadUser() {
   }
 }
 
-function openFeature(section) {
-  document.getElementById("featureScreen").style.display = "none";
+function openFeature(section){
 
-  const sections = ["profile", "chat", "sports", "diet"];
+  const sections = ["profile","chat","sports","diet"];
 
-  sections.forEach((s) => {
-    document.getElementById(s + "Section").style.display =
-      s === section ? "block" : "none";
+  sections.forEach(function(s){
 
-      if(section === "sports"){
-  loadSports();
-}
+    const el = document.getElementById(s + "Section");
+    if(!el) return;
+
+    if(s === section){
+
+      if(s === "profile"){
+        el.style.display = "flex";   // needed for overlay center layout
+      }else{
+        el.style.display = "block";
+      }
+
+    }else{
+      el.style.display = "none";
+    }
+
   });
 
-  // load data when opened
-  if (section === "profile") loadProfile();
-  if (section === "sports") loadSports();
-  if (section === "diet") loadDiet();
-  if (section === "chat") loadHistory();
+  // keep dashboard visible for blur
+  if(section !== "profile"){
+    document.getElementById("featureScreen").style.display = "none";
+  }
+
+  // load data
+  if(section === "profile") loadProfile();
+  if(section === "sports") loadSports();
+  if(section === "diet") loadDiet();
+  if(section === "chat") loadHistory();
+
 }
 
 function goBack() {
@@ -246,7 +264,10 @@ function goBack() {
     document.getElementById(s + "Section").style.display = "none";
   });
 
-  document.getElementById("featureScreen").style.display = "flex";
+ document.getElementById("featureScreen").style.display = "flex";
+
+  
+
 }
 function openFullChat(index) {
   const chat = window.fullHistory[index];
