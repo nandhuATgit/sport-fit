@@ -7,6 +7,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/auth");
 const aiRoutes = require("./routes/ai");
 const userRoutes = require("./routes/user");
+const sportsRoutes = require("./routes/sports");
 
 const app = express();
 
@@ -18,7 +19,8 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/ai", aiRoutes);
-app.use("/api/sports", require("./routes/sports"));
+app.use("/api/sports", sportsRoutes);
+
 app.use("/api/diet", require("./routes/diet"));
 
 // ✅ SERVE FRONTEND

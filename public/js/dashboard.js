@@ -115,7 +115,7 @@ async function loadHistory() {
 
 async function loadProfile() {
   try {
-    const res = await fetch(API + "/api/auth/profile", {
+    const res = await fetch(API + "/api/user/me", {
       headers: {
         Authorization: "Bearer " + token,
       },
@@ -142,16 +142,22 @@ async function loadSports() {
   const res = await fetch(API + "/api/sports");
   const data = await res.json();
 
-  const sportsBox = document.getElementById("sportsBox");
-  sportsBox.innerHTML = "";
+    const box = document.getElementById("sportsBox");
 
-  data.forEach((sport) => {
-    sportsBox.innerHTML += `
-  <div class="glass sport-item">
-    <h3>${sport.name}</h3>
-    <p>${sport.description}</p>
-  </div>
-`;
+  box.innerHTML = "";
+
+  data.forEach(sport => {
+
+    const card = document.createElement("div");
+    card.className = "sport-item glass";
+
+    card.innerHTML = `
+      <h3>${sport.name}</h3>
+    `;
+
+    card.onclick = () => openSport(sport.name);
+
+    box.appendChild(card);
   });
 }
 
@@ -172,7 +178,7 @@ async function loadDiet() {
 }
 
 
-loadUser();
+
 
 window.addEventListener("DOMContentLoaded", () => {
   loadProfile();
@@ -211,10 +217,6 @@ async function loadUser() {
     console.error("LOAD USER ERROR:", err);
   }
 }
-function enterDashboard() {
-  document.getElementById("welcomeScreen").style.display = "none";
-  document.getElementById("featureScreen").style.display = "flex";
-}
 
 function openFeature(section) {
   document.getElementById("featureScreen").style.display = "none";
@@ -224,6 +226,10 @@ function openFeature(section) {
   sections.forEach((s) => {
     document.getElementById(s + "Section").style.display =
       s === section ? "block" : "none";
+
+      if(section === "sports"){
+  loadSports();
+}
   });
 
   // load data when opened
@@ -259,4 +265,41 @@ function openFullChat(index) {
 
 function closeChatModal() {
   document.getElementById("chatModal").style.display = "none";
+}
+
+
+
+
+async function openSport(name){
+
+  const res = await fetch(`${API}/api/sports/data/${name}`);
+  const sport = await res.json();
+
+  const box = document.getElementById("sportsBox");
+
+  box.innerHTML = `
+  <h2>${sport.name}</h2>
+
+  <h3>Rules</h3>
+  <ul>${sport.rules.map(r => `<li>${r}</li>`).join("")}</ul>
+
+  <h3>Workouts</h3>
+  <ul>${sport.workouts.map(w => `<li>${w}</li>`).join("")}</ul>
+
+  <h3>Diet</h3>
+  <p>${sport.diet}</p>
+
+  <h3>Protein Intake</h3>
+  <p>${sport.protein}</p>
+
+  <h3>Nutrition</h3>
+  <ul>${sport.nutrition.map(n => `<li>${n}</li>`).join("")}</ul>
+
+  <h3>Injury Prevention</h3>
+  <ul>${sport.injuryPrevention.map(i => `<li>${i}</li>`).join("")}</ul>
+
+  <button onclick="generatePlan('${sport.name}')">
+    Create My Training Plan
+  </button>
+  `;
 }

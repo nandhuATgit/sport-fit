@@ -1,6 +1,6 @@
 const express = require("express");
 const axios = require("axios");
-const History = require("../models/history");
+const History = require("../models/History");
 const User = require("../models/User");
 const auth = require("../middleware/authMiddleware");
 
@@ -125,6 +125,79 @@ router.get("/history", auth, async (req, res) => {
     console.error("History error:", err.message);
     res.status(500).json({ message: "History error" });
   }
+});
+
+
+
+
+
+
+router.post("/training-plan", auth, async (req, res) => {
+
+  try {
+
+    const { sport } = req.body;
+
+    const user = await User.findById(req.user);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    /* SIMPLE AI RESPONSE FOR NOW */
+
+    const plan = `
+Training Plan for ${sport}
+
+Age: ${user.age}
+Weight: ${user.weight}
+
+Weekly Plan
+
+Day 1
+Speed drills
+Basic skill training
+
+Day 2
+Strength training
+Core exercises
+
+Diet
+Balanced carbohydrates
+Lean protein
+
+Protein Intake
+${user.weight ? user.weight * 1.5 : "N/A"}g per day
+
+Injury Prevention
+Stretch before workouts
+Stay hydrated
+`;
+
+    /* SAVE PLAN */
+
+    user.trainingPlans.push({
+      sport: sport,
+      plan: plan
+    });
+
+    await user.save();
+
+    res.json({
+      sport: sport,
+      plan: plan
+    });
+
+  } catch (err) {
+
+    console.error(err);
+
+    res.status(500).json({
+      message: "Server error"
+    });
+
+  }
+
 });
 
 module.exports = router;

@@ -11,11 +11,11 @@
 <!-- ================= WELCOME ================= -->
 <div id="welcomeScreen" class="welcome-screen">
   <div class="welcome-box glass">
-    <h1>WELCOME</h1>
-    <h2>" <span id="welcomeUsername"></span> "</h2>
+    <h1>welcome <br> </h1>
+    
 
     <button class="start-btn" onclick="enterDashboard()">
-      Let's Start →
+      Let's get started →
     </button>
   </div>
 </div>
@@ -40,9 +40,7 @@
       🥗<br>Diet
     </div>
 
-    <div class="feature-card glass" onclick="logout()">
-      🚪<br>Logout
-    </div>
+   
 
   </div>
 </div>
@@ -52,12 +50,17 @@
   <button class="back-btn" onclick="goBack()">← Back</button>
 
   <div class="glass profile-card">
-    <h2>Your Profile</h2>
-    <p><b>Name:</b> <span id="name"></span></p>
-    <p><b>Age:</b> <span id="age"></span></p>
-    <p><b>Weight:</b> <span id="weight"></span></p>
-    <p><b>Goal:</b> <span id="goal"></span></p>
-  </div>
+    <h2>Your Profile</h2> <br><br>
+    <p><b>Name:</b> <span id="name"></span></p><br>
+    <p><b>Age:</b> <span id="age"></span></p><br>
+    <p><b>Weight:</b> <span id="weight"></span></p><br>
+    <p><b>Goal:</b> <span id="goal"></span></p><br>
+ </div>
+
+
+ <div class="log glass" onclick="logout()">Logout
+   
+    </div>
 </div>
 
 <!-- ================= AI CHAT ================= -->
@@ -68,7 +71,7 @@
 
     <!-- LEFT RECENT -->
     <div class="chat-history-panel">
-      <h3>Recent</h3>
+      <h3>Recent</h3><br>
       <div id="historyBox" class="recent-list"></div>
 
 <!-- FULL CHAT MODAL -->
@@ -96,9 +99,7 @@
 <!-- ================= SPORTS ================= -->
 <div id="sportsSection" class="feature-page" style="display:none;">
   <button class="back-btn" onclick="goBack()">← Back</button>
-  <h2>Sports Explorer</h2>
-  <div id="sportsBox" class="sports-grid"></div>
-</div>
+ 
 
 <!-- ================= DIET ================= -->
 <div id="dietSection" class="feature-page" style="display:none;">

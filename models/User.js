@@ -38,7 +38,17 @@ const userSchema = new mongoose.Schema({
   history: {
     type: [String],
     default: []
-  }
-});
+  },
 
+  trainingPlans: [
+    {
+      sport: String,
+      plan: String,
+      createdAt: {
+        type: Date,
+        default: Date.now
+      }
+    }
+  ]
+});
 module.exports = mongoose.model("User", userSchema);
