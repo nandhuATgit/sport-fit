@@ -303,3 +303,93 @@ async function openSport(name){
   </button>
   `;
 }
+
+
+
+function showCategory(type) {
+  document.getElementById("teamSports").style.display =
+    type === "team" ? "grid" : "none";
+
+  document.getElementById("individualSports").style.display =
+    type === "individual" ? "grid" : "none";
+
+  document.getElementById("combatSports").style.display =
+    type === "combat" ? "grid" : "none";
+
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+  event.target.classList.add("active");
+}
+
+function openSport(key) {
+  const sport = sportsData[key];
+
+  document.getElementById("sportTitle").innerText = sport.name;
+  document.getElementById("sportRules").innerHTML = makeList(sport.rules);
+  document.getElementById("sportTraining").innerHTML = makeList(sport.training);
+  document.getElementById("sportDiet").innerHTML = makeList(sport.diet);
+
+  document.getElementById("sportDetails").classList.add("active");
+}
+
+function closeSport() {
+  document.getElementById("sportDetails").classList.remove("active");
+}
+
+function makeList(arr) {
+  return "<ul>" + arr.map(i => `<li>${i}</li>`).join("") + "</ul>";
+}
+
+
+const sportsData = {
+
+football: {
+  name: "Football",
+  rules: [
+    "11 players per team",
+    "Match duration: 90 minutes (2 halves)",
+    "No hands except goalkeeper",
+    "Offside rule applies",
+    "Fouls result in free kicks or penalties"
+  ],
+  training: [
+    "Sprint interval training",
+    "Ball control drills",
+    "Passing accuracy routines",
+    "Agility ladder footwork",
+    "Strength & conditioning"
+  ],
+  diet: [
+    "High-carb meals for stamina",
+    "Lean protein for muscle recovery",
+    "Electrolytes for hydration",
+    "Pre-match light meals",
+    "Post-match protein + carbs"
+  ]
+},
+
+cricket: {
+  name: "Cricket",
+  rules: [
+    "11 players per team",
+    "Batting and bowling innings",
+    "Runs scored between wickets",
+    "Over = 6 legal deliveries",
+    "LBW and catch dismissals"
+  ],
+  training: [
+    "Net practice batting",
+    "Bowling line & length drills",
+    "Fielding reflex training",
+    "Core strength workouts",
+    "Endurance running"
+  ],
+  diet: [
+    "Balanced carb-protein meals",
+    "Hydration during long matches",
+    "Slow-release energy foods",
+    "Muscle recovery nutrition"
+  ]
+},
+
+
+};

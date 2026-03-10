@@ -100,6 +100,66 @@
 <div id="sportsSection" class="feature-page" style="display:none;">
   <button class="back-btn" onclick="goBack()">← Back</button>
  
+  <h2 class="section-title">Sports Explorer</h2>
+
+<!-- CATEGORY TABS -->
+<div class="sports-tabs">
+  <button class="tab-btn active" onclick="showCategory('team')">Team Sports</button>
+  <button class="tab-btn" onclick="showCategory('individual')">Individual Sports</button>
+  <button class="tab-btn" onclick="showCategory('combat')">Combat Sports</button>
+</div>
+
+<!-- TEAM SPORTS -->
+<div id="teamSports" class="sports-grid">
+  <div class="sport-card" onclick="openSport('football')">⚽ Football</div>
+  <div class="sport-card" onclick="openSport('cricket')">🏏 Cricket</div>
+  <div class="sport-card" onclick="openSport('basketball')">🏀 Basketball</div>
+  <div class="sport-card" onclick="openSport('volleyball')">🏐 Volleyball</div>
+  <div class="sport-card" onclick="openSport('hockey')">🏑 Hockey</div>
+  <div class="sport-card" onclick="openSport('rugby')">🏉 Rugby</div>
+</div>
+
+<!-- INDIVIDUAL SPORTS -->
+<div id="individualSports" class="sports-grid" style="display:none;">
+  <div class="sport-card" onclick="openSport('athletics')">🏃 Athletics (Running)</div>
+  <div class="sport-card" onclick="openSport('swimming')">🏊 Swimming</div>
+  <div class="sport-card" onclick="openSport('gymnastics')">🤸 Gymnastics</div>
+  <div class="sport-card" onclick="openSport('badminton')">🏸 Badminton</div>
+  <div class="sport-card" onclick="openSport('tennis')">🎾 Tennis</div>
+  
+</div>
+   
+<div id="combatSports" class="sports-grid" style="display:none;">
+  <div class="sport-card" onclick="openSport('boxing')">🥊 Boxing</div>
+  <div class="sport-card" onclick="openSport('kickboxing')">🤸 Kickboxing</div>
+  <div class="sport-card" onclick="openSport('judo')"> 🥋 Judo</div>
+  <div class="sport-card" onclick="openSport('karate')">🥋 Karate</div>
+  <div class="sport-card" onclick="openSport('wrestling')">🤼 Wrestling</div>
+</div>
+
+
+<!-- SPORT DETAILS PANEL -->
+<div id="sportDetails" class="sport-details">
+  <div class="sport-details-content glass">
+    <button class="close-btn" onclick="closeSport()">✖</button>
+    <h2 id="sportTitle"></h2>
+
+    <div class="details-section">
+      <h3>📜 Rules</h3>
+      <div id="sportRules"></div>
+    </div>
+
+    <div class="details-section">
+      <h3>🏋 Training Routine</h3>
+      <div id="sportTraining"></div>
+    </div>
+
+    <div class="details-section">
+      <h3>🥗 Diet Plan</h3>
+      <div id="sportDiet"></div>
+    </div>
+  </div>
+</div>
 
 <!-- ================= DIET ================= -->
 <div id="dietSection" class="feature-page" style="display:none;">
