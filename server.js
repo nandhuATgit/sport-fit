@@ -25,6 +25,11 @@ app.use("/api/diet", require("./routes/diet"));
 // ✅ SERVE FRONTEND
 app.use(express.static("public"));
 
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/public/welcome.html");
+});
+
 /* ================= AI WARMUP ================= */
 
 async function warmupAI() {
@@ -60,6 +65,9 @@ mongoose
 /* ================= SERVER ================= */
 
 const PORT = process.env.PORT || 3000;
+
+
+
 
 app.listen(PORT, () => {
   console.log(`SportFit running on http://localhost:${PORT}`);
