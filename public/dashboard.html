@@ -39,10 +39,7 @@
     <div class="feature-card glass" onclick="openFeature('diet')">
       🥗<br>Diet
     </div>
-
-   
-
-  </div>
+</div>
 </div>
 
 <!-- ================= PROFILE ================= -->
@@ -160,12 +157,311 @@
     </div>
   </div>
 </div>
+</div>
+
 
 <!-- ================= DIET ================= -->
 <div id="dietSection" class="feature-page" style="display:none;">
-  <button class="back-btn" onclick="goBack()">← Back</button>
-  <h2>Diet Planner</h2>
-  <div id="dietBox" class="glass"></div>
+<button class="back-btn" onclick="goBack()">← Back</button>
+
+<h2>Diet Planner</h2>
+
+<div class="diet-layout">
+
+<!-- SIDEBAR -->
+<div class="diet-sidebar">
+
+<button class="diet-btn active" onclick="showDiet('fitness')">
+🏃 General Fitness
+</button>
+
+<button class="diet-btn" onclick="showDiet('muscle')">
+💪 Muscle Gain
+</button>
+
+<button class="diet-btn" onclick="showDiet('loss')">
+🔥 Weight Loss
+</button>
+
+</div>
+
+
+<!-- CONTENT AREA -->
+<div class="diet-content-area">
+
+
+<!-- ================= GENERAL FITNESS ================= -->
+<div id="fitnessDiet" class="diet-panel">
+
+<div class="diet-type-buttons">
+<button class="type-btn active" onclick="showDietType('fitness','veg')">🥗 Veg</button>
+<button class="type-btn" onclick="showDietType('fitness','nonveg')">🍗 Non-Veg</button>
+</div>
+
+<!-- VEG -->
+<div id="fitness-veg">
+
+<h3 class="veg-title">Veg Plans</h3>
+
+<div class="plan-grid">
+
+<div class="diet-plan">
+<h4>Plan 1</h4>
+<p>Breakfast: Oats + Fruits</p>
+<p>Lunch: Dal + Brown Rice</p>
+<p>Dinner: Vegetable Salad</p>
+</div>
+
+<div class="diet-plan">
+<h4>Plan 2</h4>
+<p>Breakfast: Smoothie + Nuts</p>
+<p>Lunch: Paneer + Roti</p>
+<p>Dinner: Veg Soup</p>
+</div>
+
+<div class="diet-plan">
+<h4>Plan 3</h4>
+<p>Breakfast: Poha + Fruits</p>
+<p>Lunch: Rajma + Rice</p>
+<p>Dinner: Veg Sandwich</p>
+</div>
+
+<div class="diet-plan">
+<h4>Plan 4</h4>
+<p>Breakfast: Banana + Peanut Butter</p>
+<p>Lunch: Veg Pulao</p>
+<p>Dinner: Dal + Salad</p>
+</div>
+
+
+
+</div>
+</div>
+
+
+<!-- NON VEG -->
+<div id="fitness-nonveg" style="display:none;">
+
+<h3 class="nonveg-title">Non-Veg Plans</h3>
+
+<div class="plan-grid">
+
+<div class="diet-plan">
+<h4>Plan 1</h4>
+<p>Breakfast: Eggs + Toast</p>
+<p>Lunch: Chicken + Rice</p>
+<p>Dinner: Fish + Salad</p>
+</div>
+
+<div class="diet-plan">
+<h4>Plan 2</h4>
+<p>Breakfast: Omelette</p>
+<p>Lunch: Grilled Chicken</p>
+<p>Dinner: Tuna Salad</p>
+</div>
+
+<div class="diet-plan">
+<h4>Plan 3</h4>
+<p>Breakfast: Egg Sandwich</p>
+<p>Lunch: Chicken Breast + Veggies</p>
+<p>Dinner: Boiled Eggs + Salad</p>
+</div>
+
+<div class="diet-plan">
+<h4>Plan 4</h4>
+<p>Breakfast: Scrambled Eggs</p>
+<p>Lunch: Fish Curry + Rice</p>
+<p>Dinner: Chicken Soup</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+
+<!-- ================= MUSCLE GAIN ================= -->
+<div id="muscleDiet" class="diet-panel" style="display:none;">
+
+<div class="diet-type-buttons">
+<button class="type-btn active" onclick="showDietType('muscle','veg')">🥗 Veg</button>
+<button class="type-btn" onclick="showDietType('muscle','nonveg')">🍗 Non-Veg</button>
+</div>
+
+
+<div id="muscle-veg">
+
+<h3 class="veg-title">Veg Plans</h3>
+
+<div class="plan-grid">
+
+<div class="diet-plan">
+<h4>Plan 1</h4>
+<p>Breakfast: Peanut Butter Toast</p>
+<p>Lunch: Paneer + Brown Rice</p>
+<p>Dinner: Lentils + Roti</p>
+</div>
+
+<div class="diet-plan">
+<h4>Plan 2</h4>
+<p>Breakfast: Banana Shake</p>
+<p>Lunch: Soybean Curry</p>
+<p>Dinner: Paneer Salad</p>
+</div>
+
+<div class="diet-plan">
+<h4>Plan 3</h4>
+<p>Breakfast: Oats + Almonds</p>
+<p>Lunch: Chickpea Curry + Rice</p>
+<p>Dinner: Cottage Cheese</p>
+</div>
+
+<div class="diet-plan">
+<h4>Plan 4</h4>
+<p>Breakfast: Protein Smoothie</p>
+<p>Lunch: Paneer Wrap</p>
+<p>Dinner: Lentil Soup</p>
+</div>
+
+</div>
+
+</div>
+
+
+<div id="muscle-nonveg" style="display:none;">
+
+<h3 class="nonveg-title">Non-Veg Plans</h3>
+
+<div class="plan-grid">
+
+<div class="diet-plan">
+<h4>Plan 1</h4>
+<p>Breakfast: Eggs + Milk</p>
+<p>Lunch: Chicken Breast</p>
+<p>Dinner: Fish + Vegetables</p>
+</div>
+
+<div class="diet-plan">
+<h4>Plan 2</h4>
+<p>Breakfast: Omelette + Toast</p>
+<p>Lunch: Grilled Chicken</p>
+<p>Dinner: Tuna Salad</p>
+</div>
+
+<div class="diet-plan">
+<h4>Plan 3</h4>
+<p>Breakfast: Egg Sandwich</p>
+<p>Lunch: Chicken + Rice</p>
+<p>Dinner: Boiled Eggs</p>
+</div>
+
+<div class="diet-plan">
+<h4>Plan 4</h4>
+<p>Breakfast: Scrambled Eggs</p>
+<p>Lunch: Salmon + Rice</p>
+<p>Dinner: Chicken Soup</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ================= WEIGHT LOSS ================= -->
+<div id="lossDiet" class="diet-panel" style="display:none;">
+
+<div class="diet-type-buttons">
+<button class="type-btn active" onclick="showDietType('loss','veg')">🥗 Veg</button>
+<button class="type-btn" onclick="showDietType('loss','nonveg')">🍗 Non-Veg</button>
+</div>
+
+
+<div id="loss-veg">
+
+<h3 class="veg-title">Veg Plans</h3>
+
+<div class="plan-grid">
+
+<div class="diet-plan">
+<h4>Plan 1</h4>
+<p>Breakfast: Green Tea + Fruits</p>
+<p>Lunch: Salad + Dal</p>
+<p>Dinner: Soup</p>
+</div>
+
+<div class="diet-plan">
+<h4>Plan 2</h4>
+<p>Breakfast: Smoothie Bowl</p>
+<p>Lunch: Quinoa + Vegetables</p>
+<p>Dinner: Veg Soup</p>
+</div>
+
+<div class="diet-plan">
+<h4>Plan 3</h4>
+<p>Breakfast: Sprouts</p>
+<p>Lunch: Brown Rice + Veggies</p>
+<p>Dinner: Fruit Salad</p>
+</div>
+
+<div class="diet-plan">
+<h4>Plan 4</h4>
+<p>Breakfast: Oats + Apple</p>
+<p>Lunch: Lentil Soup</p>
+<p>Dinner: Veg Stir Fry</p>
+</div>
+
+</div>
+
+</div>
+
+
+<div id="loss-nonveg" style="display:none;">
+
+<h3 class="nonveg-title">Non-Veg Plans</h3>
+
+<div class="plan-grid">
+
+<div class="diet-plan">
+<h4>Plan 1</h4>
+<p>Breakfast: Boiled Eggs</p>
+<p>Lunch: Grilled Chicken</p>
+<p>Dinner: Fish Soup</p>
+</div>
+
+<div class="diet-plan">
+<h4>Plan 2</h4>
+<p>Breakfast: Omelette</p>
+<p>Lunch: Chicken Salad</p>
+<p>Dinner: Tuna Salad</p>
+</div>
+
+<div class="diet-plan">
+<h4>Plan 3</h4>
+<p>Breakfast: Egg Whites</p>
+<p>Lunch: Grilled Fish</p>
+<p>Dinner: Chicken Soup</p>
+</div>
+
+<div class="diet-plan">
+<h4>Plan 4</h4>
+<p>Breakfast: Scrambled Eggs</p>
+<p>Lunch: Turkey Salad</p>
+<p>Dinner: Fish + Vegetables</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+</div>
 </div>
 
 <script src="js/dashboard.js"></script>

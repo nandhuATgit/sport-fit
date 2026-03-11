@@ -164,27 +164,120 @@ async function loadSports() {
   });
 }
 
-async function loadDiet() {
-  const res = await fetch(API + "/api/diet");
-  const data = await res.json();
+function showDiet(type){
 
-  const dietBox = document.getElementById("dietBox");
-  dietBox.innerHTML = "";
+document.querySelectorAll(".diet-panel").forEach(panel=>{
+panel.style.display="none";
+});
 
-  data.forEach((item) => {
-    dietBox.innerHTML += `
-      <h3>${item.name}</h3>
-      <p>${item.description}</p>
-      <hr>
-    `;
-  });
+document.getElementById(type+"Diet").style.display="block";
+
+
+document.querySelectorAll(".diet-btn").forEach(btn=>{
+btn.classList.remove("active");
+});
+
+event.target.classList.add("active");
+
+}
+
+function showDietType(category, type){
+
+const veg = document.getElementById(category + "-veg");
+const nonveg = document.getElementById(category + "-nonveg");
+
+veg.style.display = "none";
+nonveg.style.display = "none";
+
+document.getElementById(category + "-" + type).style.display = "block";
+
+/* UPDATE ACTIVE BUTTON */
+
+const buttons = document.querySelectorAll(".type-btn");
+
+buttons.forEach(btn => {
+btn.classList.remove("active");
+});
+
+event.target.classList.add("active");
+
 }
 
 
 
+// ================= LOAD DIET FROM API =================
+
+async function loadDiet() {
+
+  try {
+
+    const dietBox = document.getElementById("dietBox");
+
+    // stop if dietBox does not exist
+    if (!dietBox) return;
+
+    const res = await fetch(API + "/api/diet");
+    const data = await res.json();
+
+    dietBox.innerHTML = "";
+
+    data.forEach((item) => {
+
+      dietBox.innerHTML += `
+        <div class="diet-plan">
+          <h3>${item.name}</h3>
+          <p>${item.description}</p>
+        </div>
+      `;
+
+    });
+
+  } catch (error) {
+    console.error("Diet loading error:", error);
+  }
+
+}
+
+
+// ================= DIET SECTION ANIMATION =================
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const headers = document.querySelectorAll(".diet-header");
+
+  headers.forEach(header => {
+
+    header.addEventListener("click", () => {
+
+      const content = header.nextElementSibling;
+
+      if (!content) return;
+
+      content.classList.toggle("open");
+
+      if (content.style.maxHeight) {
+        content.style.maxHeight = null;
+      } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+
+    });
+
+  });
+
+});
+
+
+// ================= PAGE LOAD =================
 
 window.addEventListener("DOMContentLoaded", () => {
-  loadProfile();
+
+  if (typeof loadProfile === "function") {
+    loadProfile();
+  }
+
+  loadDiet();
+
 });
 
 /* ================= WELCOME FLOW ================= */
