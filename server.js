@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-
+const axios = require("axios");   // ✅ ADD HERE
 
 const authRoutes = require("./routes/auth");
 const aiRoutes = require("./routes/ai");
@@ -20,20 +20,47 @@ app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/ai", aiRoutes);
 app.use("/api/sports", sportsRoutes);
-
 app.use("/api/diet", require("./routes/diet"));
 
 // ✅ SERVE FRONTEND
 app.use(express.static("public"));
 
-// ✅ MONGODB
+/* ================= AI WARMUP ================= */
+
+async function warmupAI() {
+  try {
+    await axios.post("http://localhost:11434/api/generate", {
+      model: "phi3:mini",
+      prompt: "Hello",
+      stream: false
+    });
+
+    console.log("🔥 AI model warmed up");
+
+  } catch (err) {
+
+    console.log("⚠️ AI warmup failed");
+
+  }
+}
+
+/* ================= MONGODB ================= */
+
 mongoose
   .connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB Connected"))
+  .then(() => {
+    console.log("MongoDB Connected");
+
+    // ✅ WARM UP AI AFTER DB CONNECT
+    warmupAI();
+
+  })
   .catch((err) => console.log(err));
 
-// ✅ SERVER
+/* ================= SERVER ================= */
+
 const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
   console.log(`SportFit running on http://localhost:${PORT}`);
 });

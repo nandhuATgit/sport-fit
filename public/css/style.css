@@ -157,7 +157,7 @@ hr {
 
 .text2 {
   color: white;
-  font-family: "Times New Roman", Times, serif;
+  font-family: 'Bebas Neue',sans-serif;
   font-size: 70px;
   opacity: 0.2;
   text-align: center;
@@ -267,38 +267,117 @@ hr {
 }
 
 /* ================= FEATURE GRID ================= */
-.feature-screen {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Screen container */
+.feature-screen{
+  height:100vh;
+  display:none;
+  justify-content:center;
+  align-items:center;
 }
 
-.feature-grid {
-  display: flex;
-  gap: 40px;
-  flex-wrap: wrap;
-  justify-content: center;
+/* When screen opens */
+.feature-screen.show{
+  display:flex;
+  animation:screenFade 0.6s ease;
 }
 
-.feature-card {
-  width: 300px;
-  height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  cursor: pointer;
-  transition: 0.3s;
-  background: linear-gradient(45deg, #330092, #000000);
+.feature-container{
+  width:1200px;
+  padding:50px;
+  border-radius:25px;
+
+  background:linear-gradient(145deg,#0d001f,#12002e);
+
+  box-shadow:
+  0 0 40px rgba(120,0,255,0.4),
+  inset 0 0 30px rgba(255,255,255,0.05);
+
+  text-align:center;
+
+  animation:containerFade 0.8s ease;
 }
 
-.feature-card:hover {
-  transform: translateY(-8px) scale(1.05);
-  transform: scale(1.1);
-  box-shadow: 0 0 20px rgb(85, 0, 255);
+
+
+/* Caption */
+.feature-caption{
+  color:#aaaaaa50;
+  margin-bottom:40px;
+  font-size:14px;
 }
+
+/* Grid */
+.feature-grid{
+  display:flex;
+  gap:40px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+/* Cards */
+.feature-card{
+  width:300px;
+  height:200px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  font-size:20px;
+  background:linear-gradient(45deg,#330092,#000000);
+  color:white;
+   transition:all 0.3s ease;
+  cursor:pointer;
+
+  opacity:0;
+  transform:translateY(40px) scale(0.9);
+  animation:cardEnter 0.5s forwards;
+}
+
+/* stagger effect */
+.feature-card:nth-child(1){ animation-delay:0.1s; }
+.feature-card:nth-child(2){ animation-delay:0.2s; }
+.feature-card:nth-child(3){ animation-delay:0.3s; }
+.feature-card:nth-child(4){ animation-delay:0.4s; }
+
+/* hover animation */
+.feature-card:hover{
+  transform:translateX(6px);
+  box-shadow:0 15px 40px rgb(49, 90, 255);
+}
+
+/* animations */
+
+@keyframes screenFade{
+  from{
+    opacity:0;
+    transform:scale(0.95);
+  }
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+@keyframes cardEnter{
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+@keyframes containerFade{
+  from{
+    opacity:0;
+    transform:scale(0.95);
+  }
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+
+
+
 
 .log {
   display: flex;
@@ -382,6 +461,207 @@ hr {
         opacity:1;
     }
 }
+
+
+.ai-section{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom: 20px;
+}
+
+
+.ai-btn{
+position:absolute;
+top:20px;
+right:80px; /* space from right side */
+
+width:auto;          /* prevents stretching */
+display:inline-block;
+
+padding:10px 18px;
+font-size:14px;
+
+border:none;
+border-radius:8px;
+
+background:linear-gradient(45deg,#5a00ff,#8a2be2);
+color:white;
+font-weight:bold;
+
+cursor:pointer;
+transition:0.3s;
+}
+
+.ai-btn:hover{
+transform:scale(1.05);
+box-shadow:0 10px 25px rgba(120,0,255,0.6);
+}
+
+.ai-output{
+margin-top:20px;
+padding:20px;
+background:#111;
+border-radius:10px;
+white-space:pre-line;
+}
+
+.ai-plan-box{
+  margin-top:25px;
+  padding:20px;
+  background:#111;
+  border-radius:12px;
+  white-space:pre-line;
+}
+
+
+/* AI WINDOW BACKGROUND */
+
+.sf-ai-window{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,0.85);
+backdrop-filter:blur(6px);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+opacity:0;
+visibility:hidden;
+
+transition:opacity .35s ease;
+z-index:999;
+}
+
+.sf-ai-window.show{
+opacity:1;
+visibility:visible;
+}
+
+/* WINDOW BOX */
+.sf-ai-window-content{
+
+width:clamp(700px,70vw,1100px);
+max-height:85vh;
+
+background:linear-gradient(135deg,#0b0b0b,#1b003b);
+
+border-radius:16px;
+
+box-shadow:
+0 25px 80px rgba(0,0,0,.7),
+0 0 40px rgba(110,0,255,.4);
+
+padding:35px;
+
+transform:translateY(40px) scale(.9);
+transition:all .35s ease;
+
+overflow-y:auto;
+}
+
+/* POP ANIMATION */
+
+.sf-ai-window.show .sf-ai-window-content{
+transform:translateY(0) scale(1);
+}
+
+/* HEADER */
+
+.sf-ai-window-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+margin-bottom:25px;
+padding-bottom:10px;
+
+border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.sf-ai-window-header h2{
+font-size:22px;
+font-weight:600;
+color:white;
+}
+
+/* CLOSE BUTTON */
+
+.sf-ai-close{
+
+width:32px;
+height:32px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+border-radius:8px;
+
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+
+color:white;
+font-size:16px;
+
+cursor:pointer;
+transition:.2s;
+}
+
+.sf-ai-close:hover{
+background:rgba(255,255,255,.12);
+transform:scale(1.05);
+}
+
+/* RESULT AREA */
+.sf-ai-result{
+
+line-height:1.8;
+font-size:15px;
+
+max-width:900px;
+margin:auto;
+
+white-space:pre-line;
+color:#ddd;
+}
+
+/* LOADING */
+
+.sf-ai-loading{
+text-align:center;
+padding:40px 0;
+color:#ccc;
+font-size:16px;
+}
+
+.sf-ai-loading::before{
+content:"";
+display:block;
+width:35px;
+height:35px;
+
+margin:0 auto 15px;
+
+border:3px solid rgba(255,255,255,.2);
+border-top:3px solid #8b5cf6;
+
+border-radius:50%;
+
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+to{ transform:rotate(360deg); }
+}
+
+
+
 
 /* ================= SPORTS GRID ================= */
 .sports-grid {

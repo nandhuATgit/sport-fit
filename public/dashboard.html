@@ -11,7 +11,7 @@
 <!-- ================= WELCOME ================= -->
 <div id="welcomeScreen" class="welcome-screen">
   <div class="welcome-box glass">
-    <h1>welcome <br> </h1>
+    <h1 style="font-family:'Bebas Neue',sans-serif; font-size: 80px;">Welcome <br> </h1>
     
 
     <button class="start-btn" onclick="enterDashboard()">
@@ -22,6 +22,14 @@
 
 <!-- ================= FEATURE BLOCKS ================= -->
 <div id="featureScreen" class="feature-screen" style="display:none;">
+
+<div class="feature-container">
+
+    
+    <p class="feature-caption">
+      Your personal hub for training, sports performance, and nutrition guidance
+    </p>
+
   <div class="feature-grid">
 
     <div class="feature-card glass" onclick="openFeature('profile')">
@@ -39,6 +47,7 @@
     <div class="feature-card glass" onclick="openFeature('diet')">
       🥗<br>Diet
     </div>
+</div>
 </div>
 </div>
 
@@ -142,7 +151,11 @@
 
 <button class="close-btn" onclick="closeSport()">✖</button>
 
+
+
 <h2 id="sportTitle"></h2>
+
+
 
 <div class="details-section">
 <h3>📜 Rules</h3>
@@ -169,7 +182,40 @@
 <div id="sportInjury"></div>
 </div>
 
+<!-- AI TRAINING PLAN BUTTON -->
+
+<div class="ai-section"></div>
+<button onclick="generatePlan(currentSport)" class="ai-btn">
+⚡ Generate AI Training Plan
+</button>
+<div id="planOutput" class="ai-output"></div>
+
 </div>
+
+
+
+<!-- AI TRAINING PLAN WINDOW -->
+<div id="sfAiWindow" class="sf-ai-window">
+
+  <div class="sf-ai-window-content">
+
+    <div class="sf-ai-window-header">
+      <h2>⚡ AI Training Plan</h2>
+      <button onclick="closeSfAiWindow()" class="sf-ai-close">✖</button>
+    </div>
+
+    <div id="sfAiResult" class="sf-ai-result">
+      <div class="sf-ai-loading">
+        🤖 Generating your personalized training plan...
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+
 </div>
 </div>
 

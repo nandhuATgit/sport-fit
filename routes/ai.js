@@ -1,8 +1,14 @@
 const express = require("express");
 const axios = require("axios");
+const http = require("http");
+
 const History = require("../models/History");
 const User = require("../models/User");
 const auth = require("../middleware/authMiddleware");
+
+const agent = new http.Agent({
+  keepAlive: true
+});
 
 const router = express.Router();
 
@@ -20,57 +26,81 @@ router.post("/ask", auth, async (req, res) => {
     }
 
     const prompt = `
-You are SportFit AI — an expert fitness and nutrition coach.
+You are **SportFit AI**, an elite AI sports scientist, fitness coach, and nutrition expert.
+
+Your job is to generate **high-quality, practical fitness guidance** tailored to the user.
 
 STRICT RESPONSE RULES (must follow):
 
-- Always use markdown formatting
-- Start with a clear bold title
+- Use markdown formatting
+- Start with a bold title
 - Use section headings (###)
 - Use bullet points (-)
 - Keep sentences short
-- Add blank lines between sections
-- NEVER write long paragraphs
-- Make the answer easy to scan
+- Avoid long paragraphs
+- Make the response easy to scan
+- Always provide actionable advice
 
-RESPONSE FORMAT EXAMPLE:
+RESPONSE STRUCTURE (always follow this):
 
-**Morning Diet Plan**
+**Title related to the user's question**
 
-Short intro line.
+Short helpful intro.
 
-### 🥚 Protein
-- Eggs
-- Greek yogurt
+### 🎯 Goal Analysis
+Explain how the advice helps the user's goal.
 
-### 🍞 Carbs
-- Oats
-- Whole wheat toast
+### 🏃 Training Recommendations
+Provide specific exercises, drills, or sports training.
 
-### 🥑 Healthy Fats
-- Almonds
-- Avocado
+### 🥗 Nutrition Plan
+Include foods and nutrition strategy.
 
-User Profile:
+### 🍗 Protein Intake
+Calculate daily protein needs when possible.
+
+### 💧 Hydration
+Give daily hydration advice.
+
+### ⚡ Performance Tips
+Add tips to improve strength, endurance, recovery.
+
+### 🛡 Injury Prevention
+Provide safety recommendations.
+
+### 🧠 Motivation Tip
+Give one short motivational tip.
+
+USER PROFILE
+
 Age: ${user?.age || "unknown"}
 Weight: ${user?.weight || "unknown"}
 Goal: ${user?.goal || "general fitness"}
 
-User Question:
+IMPORTANT RULES
+
+- If the user asks about a sport, provide sport-specific drills and conditioning.
+- If the user asks about diet, provide a structured diet plan.
+- If the user asks about fitness, include both workout and nutrition advice.
+- Adapt advice based on the user's goal.
+- Always keep answers practical and realistic.
+
+USER QUESTION:
 ${message}
 
-Now respond following the rules strictly.
+Now generate the best possible response.
 `;
 
     const response = await axios.post(
       "http://localhost:11434/api/generate",
       {
-        model: "phi3",
+        model: "phi3:mini",
         prompt,
         stream: true,
       },
       {
         responseType: "stream",
+         httpAgent: agent
       }
     );
 
@@ -78,21 +108,28 @@ Now respond following the rules strictly.
 
     let fullReply = "";
 
-    response.data.on("data", (chunk) => {
-      const lines = chunk.toString().split("\n").filter(Boolean);
+    let buffer = "";
 
-      for (const line of lines) {
-        try {
-          const parsed = JSON.parse(line);
-          const token = parsed.response || "";
+response.data.on("data", (chunk) => {
+  buffer += chunk.toString();
 
-          fullReply += token;
-          res.write(token);
-        } catch (e) {
-          console.error("Chunk parse error:", e.message);
-        }
-      }
-    });
+  const parts = buffer.split("\n");
+  buffer = parts.pop(); // keep incomplete part
+
+  for (const part of parts) {
+    if (!part.trim()) continue;
+
+    try {
+      const parsed = JSON.parse(part);
+      const token = parsed.response || "";
+
+      fullReply += token;
+      res.write(token);
+    } catch (err) {
+      console.log("Skipping invalid chunk");
+    }
+  }
+});
 
     response.data.on("end", async () => {
       try {
@@ -144,48 +181,99 @@ router.post("/training-plan", auth, async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    /* SIMPLE AI RESPONSE FOR NOW */
+    const prompt = `
+You are SportFit AI — an elite sports performance coach and nutritionist.
 
-    const plan = `
-Training Plan for ${sport}
+Your task is to generate a **complete training plan and nutrition guide** for the sport: ${sport}
 
+User Profile
 Age: ${user.age}
 Weight: ${user.weight}
+Goal: ${user.goal}
 
-Weekly Plan
+STRICT RULES
 
+- Use markdown
+- Use short sentences
+- Use headings and bullet points
+- Make the plan practical for athletes
+
+RESPONSE FORMAT
+
+**${sport} Training Program**
+
+Short intro.
+
+### Weekly Training Plan
 Day 1
-Speed drills
-Basic skill training
+- drills
+- conditioning
 
 Day 2
-Strength training
-Core exercises
+- skill training
+- strength training
 
-Diet
-Balanced carbohydrates
-Lean protein
+Day 3
+- recovery
 
-Protein Intake
-${user.weight ? user.weight * 1.5 : "N/A"}g per day
+### Sport-Specific Drills
+- drills related to ${sport}
 
-Injury Prevention
-Stretch before workouts
-Stay hydrated
+### Strength Training
+- exercises for athletes
+
+### Diet Plan
+
+Breakfast
+- foods
+
+Lunch
+- foods
+
+Dinner
+- foods
+
+Snacks
+- foods
+
+### Protein Requirement
+Calculate protein based on body weight.
+
+### Hydration
+Daily hydration advice.
+
+### Injury Prevention
+Safety tips for ${sport} athletes.
+
+Now generate the best plan.
 `;
 
-    /* SAVE PLAN */
+    const response = await axios.post(
+      "http://localhost:11434/api/generate",
+      {
+        model: "phi3:mini",
+        prompt,
+        stream: false,
+
+        
+      },
+      {
+    httpAgent: agent
+  }
+    );
+
+    const plan = response.data.response;
 
     user.trainingPlans.push({
-      sport: sport,
-      plan: plan
+      sport,
+      plan
     });
 
     await user.save();
 
     res.json({
-      sport: sport,
-      plan: plan
+      sport,
+      plan
     });
 
   } catch (err) {
@@ -193,7 +281,7 @@ Stay hydrated
     console.error(err);
 
     res.status(500).json({
-      message: "Server error"
+      message: "AI training plan error"
     });
 
   }

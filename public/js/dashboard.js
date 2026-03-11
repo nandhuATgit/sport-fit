@@ -4,7 +4,7 @@ console.log("TOKEN:", token);
 
 if (!token) window.location.href = "login.html";
 
-
+let currentSport = "";
  
 
 function logout() {
@@ -350,6 +350,12 @@ function openFeature(section){
 
 }
 
+function showFeatureScreen(){
+  const screen = document.getElementById("featureScreen");
+  screen.classList.add("show");
+}
+
+
 function goBack() {
   const sections = ["profile", "chat", "sports", "diet"];
 
@@ -384,7 +390,7 @@ function closeChatModal() {
 
 
 
-async function openSport(name){
+async function openSportFromAPI(name){
 
   const res = await fetch(`${API}/api/sports/data/${name}`);
   const sport = await res.json();
@@ -412,11 +418,12 @@ async function openSport(name){
   <h3>Injury Prevention</h3>
   <ul>${sport.injuryPrevention.map(i => `<li>${i}</li>`).join("")}</ul>
 
-  <button onclick="generatePlan('${sport.name}')">
+  <button onclick="generatePlan(currentSport)">
     Create My Training Plan
   </button>
   `;
 }
+
 
 
 
@@ -434,11 +441,95 @@ function showCategory(type) {
   event.target.classList.add("active");
 }
 
+
+
+async function generatePlan(sport){
+
+  console.log("SPORT:", sport);
+
+const modal = document.getElementById("sfAiWindow");
+const result = document.getElementById("sfAiResult");
+
+/* OPEN AI WINDOW */
+
+if(modal){
+modal.classList.add("show");
+}
+
+/* SHOW LOADING MESSAGE */
+
+
+result.innerHTML = `
+<div style="text-align:center">
+🤖 Generating AI Training Plan...
+<br><br>
+⏳ Please wait
+</div>
+`;
+
+try{
+
+const token = localStorage.getItem("token");
+
+/* CALL BACKEND AI API */
+
+const res = await fetch(API +"/api/ai/training-plan",{
+method:"POST",
+headers:{
+"Content-Type":"application/json",
+"Authorization":"Bearer " + token
+},
+body: JSON.stringify({ sport })
+});
+
+/* PARSE RESPONSE */
+
+const data = await res.json();
+
+/* DISPLAY AI RESULT */
+
+if(result){
+result.innerHTML = `
+<h3>🏋 Training Plan for ${data.sport}</h3>
+
+<pre>${data.plan}</pre>
+`;
+}
+
+}catch(err){
+
+console.error("AI PLAN ERROR:", err);
+
+if(result){
+result.innerHTML = "❌ Failed to generate AI training plan. Please try again.";
+}
+
+}
+
+}
+
+function closeSfAiWindow(){
+
+document.getElementById("sfAiWindow").classList.remove("show");
+
+}
+
+
+
+
+
 function openSport(key){
+
+  currentSport = key;
 
 const sport = sportsData[key];
 
 document.getElementById("sportTitle").innerText = sport.name;
+
+document.querySelector(".ai-btn").setAttribute(
+  "onclick",
+  `generatePlan('${sport.name}')`
+);
 
 document.getElementById("sportRules").innerHTML = makeList(sport.rules);
 
